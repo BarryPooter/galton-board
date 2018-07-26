@@ -35,26 +35,6 @@ class Unit_BallTest extends TestCase
         $this->assertTrue(5 === $this->sut->getY());
     }
 
-    public function testIfDroppingTheBallWithoutARowDoesntMoveIt () : void
-    {
-        $this->sut->setX(5);
-        $this->sut->setY(0);
-        $this->sut->dropBallOneStep(null);
-
-        $this->assertEquals(5, $this->sut->getX());
-        $this->assertEquals(0, $this->sut->getY());
-    }
-
-    public function testBallNotMovingOnceOnAContainer ()
-    {
-        $originalX = $this->sut->getX();
-        $originalY = $this->sut->getY();
-
-        $this->sut->dropBallOneStep(null);
-        $this->assertEquals($originalX, $this->sut->getX());
-        $this->assertEquals($originalY, $this->sut->getY());
-    }
-
     public function testBallMovingOnPins ()
     {
         $simulatedNextRow = [1,0,1];

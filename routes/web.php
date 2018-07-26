@@ -13,15 +13,19 @@
 
 Route::get('/', function () {
     $board = new \App\Classes\GaltonBoard();
-    $board->addBalls(100);
+    $board->addBalls(10);
     $board->dropAllBalls();
+//    dd($board->getBalls());
 
     $containers = (array) null;
     for ($i = 0; $i < $board->getAmountOfContainers(); $i++) {
-        $containers[(0+$i)*2] = (int) null;
+        $containers[0+(2*$i)] = (int) null;
     }
 
     foreach ($board->getBalls() as $ball) {
+        if (!isset($containers[$ball->getX()])) {
+            $containers[$ball->getX()] = (int) null;
+        }
         $containers[$ball->getX()]++;
     }
 

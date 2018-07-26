@@ -72,9 +72,10 @@ class GaltonBoard
     public function dropAllBalls () : void
     {
         foreach ($this->balls as $ball) {
-            foreach ($this->getBoard() as $row) {
-                $ball->setX(self::$ballDropPosition);
-                $ball->dropBallOneStep($row);
+            $ball->setX(self::$ballDropPosition);
+
+            for ($i = 0; $i < $this->getRows(); $i++) {
+                $ball->dropBallOneStep($this->getBoard()[$i]);
             }
         }
     }

@@ -46,26 +46,21 @@ class Ball
      */
     public function dropBallOneStep(array $nextRow = null) : void
     {
-        if (is_null($nextRow)) return;
-
-        $nextPositionX = $this->_decideNextPosition();
-        if (!$this->_isMovementAllowedOnTileType($nextPositionX)) return;
-
-        $this->setX($nextPositionX);
-        $this->setY($this->getY() + 1);
+        $this->_randomlyDecideAddition();
+        $this->y++;
     }
 
     /**
-     * @return int
+     * @return void
      */
-    private final function _decideNextPosition () : int
+    private final function _randomlyDecideAddition () : void
     {
         $chance = rand(0,1);
-        $addition = (1 > $chance)
-            ? -1
-            : 1;
-
-        return $this->getX() + $addition;
+        if (0 === $chance) {
+            $this->x--;
+        } else {
+            $this->x++;
+        }
     }
 
     /**

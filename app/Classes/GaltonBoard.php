@@ -6,6 +6,7 @@ class GaltonBoard
 {
     protected static $rows = 5;
     protected static $ballDropPosition = 5;
+    protected static $amountOfContainers = 6;
     protected static $board = [
         [0,0,0,0,0,1,0,0,0,0,0],
         [0,0,0,0,1,0,1,0,0,0,0],
@@ -76,5 +77,13 @@ class GaltonBoard
                 $ball->dropBallOneStep($row);
             }
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getAmountOfContainers () : int
+    {
+        return self::$amountOfContainers;
     }
 }

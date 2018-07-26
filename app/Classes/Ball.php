@@ -40,24 +40,32 @@ class Ball
     }
 
     /**
-     * @param int $tileType
+     * @param array $nextRow
      * @return void
+     * @internal param int $tileType
      */
-    public function dropBallOneStep(int $tileType = 1) : void
+    public function dropBallOneStep(array $nextRow = null) : void
     {
-        if (!$this->_isMovementAllowedOnTileType($tileType)) return;
+        if (is_null($nextRow)) return;
 
+        $nextPositionX = $this->_decideNextPosition();
+        if (!$this->_isMovementAllowedOnTileType($nextPositionX)) return;
+
+        $this->setX($nextPositionX);
+        $this->setY($this->getY() + 1);
+    }
+
+    /**
+     * @return int
+     */
+    private final function _decideNextPosition () : int
+    {
         $chance = rand(0,1);
         $addition = (1 > $chance)
             ? -1
             : 1;
 
-        $this->setX(
-            $this->getX() + $addition
-        );
-        $this->setY(
-            $this->getY()+1
-        );
+        return $this->getX() + $addition;
     }
 
     /**

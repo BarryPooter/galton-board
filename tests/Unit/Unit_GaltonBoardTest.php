@@ -52,8 +52,6 @@ class Unit_GaltonBoardTest extends TestCase
 
     public function testIfAmountOfEntitiesPerRowIsCorrect ()
     {
-        $amountOfRows = $this->sut->getRows();
-
         // Follow formula : nth row has 1 more pin than the previous one.
         foreach ($this->sut->getBoard() as $index => $row) {
             // We start from 1.

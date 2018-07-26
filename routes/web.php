@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     $board = new \App\Classes\GaltonBoard();
-    $board->addBalls(20);
+    $board->addBalls(100);
     $board->dropAllBalls();
 
     $containers = (array) null;

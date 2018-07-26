@@ -2,38 +2,10 @@
 
 namespace Tests\Unit;
 
+use App\Classes\GaltonBoard;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
-class GaltonBoard
-{
-    protected static $rows = 5;
-    protected static $board = [
-        [0,0,0,0,0,1,0,0,0,0,0],
-        [0,0,0,0,1,0,1,0,0,0,0],
-        [0,0,0,1,0,1,0,1,0,0,0],
-        [0,0,1,0,1,0,1,0,1,0,0],
-        [0,1,0,1,0,1,0,1,0,1,0],
-        [2,0,2,0,2,0,2,0,2,0,2]
-    ];
-
-    /**
-     * @return array
-     */
-    public function getBoard () : array
-    {
-        return self::$board;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRows () : int
-    {
-        return self::$rows;
-    }
-}
 
 class Unit_GaltonBoardTest extends TestCase
 {
@@ -42,7 +14,7 @@ class Unit_GaltonBoardTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->sut = new GaltonBoard();
+        $this->sut = new GaltonBoard;
     }
 
     public function testIfBoardIsArray ()
@@ -69,5 +41,15 @@ class Unit_GaltonBoardTest extends TestCase
 
             $this->assertEquals($expectedPins, $actualPins);
         }
+    }
+
+    public function testIfBallsGetMade ()
+    {
+        $mockedBall = \Mockery::mock(Ball::class);
+        $this->sut->addBalls(10, $mockedBall);
+        $this->assertTrue(10 === count($this->sut->getBalls()));
+
+        $this->sut->addBalls(10, $mockedBall);
+        $this->assertTrue(20 === count($this->sut->getBalls()));
     }
 }

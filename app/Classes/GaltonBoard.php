@@ -64,4 +64,11 @@ class GaltonBoard
             $this->balls[] = new $typeOf();
         }
     }
+
+    /**
+     * @return void
+     */
+    public function dropAllBalls () : void
+    {
+    }
 }

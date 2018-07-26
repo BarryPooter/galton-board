@@ -4,8 +4,8 @@ namespace App\Classes;
 
 class Ball
 {
-    protected $y;
-    protected $x;
+    protected $y = 0;
+    protected $x = 0;
 
     /**
      * @return mixed
@@ -40,10 +40,13 @@ class Ball
     }
 
     /**
+     * @param int $tileType
      * @return void
      */
-    public function dropBallOneStep() : void
+    public function dropBallOneStep(int $tileType = 1) : void
     {
+        if (!$this->_isMovementAllowedOnTileType($tileType)) return;
+
         $chance = rand(0,1);
         $addition = (1 > $chance)
             ? -1
@@ -55,5 +58,15 @@ class Ball
         $this->setY(
             $this->getY()+1
         );
+    }
+
+    /**
+     * @param int $type
+     * @return bool
+     */
+    private final function _isMovementAllowedOnTileType (int $type) : bool
+    {
+        $_disallowed = [2];
+        return !in_array($type, $_disallowed);
     }
 }

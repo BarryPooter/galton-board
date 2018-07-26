@@ -44,4 +44,15 @@ class Unit_BallTest extends TestCase
         $this->assertNotEquals(5, $this->sut->getX());
         $this->assertNotEquals(0, $this->sut->getY());
     }
+
+    public function testBallNotMovingOnceOnAContainer ()
+    {
+        $containerTypeId = 2;
+        $originalX = $this->sut->getX();
+        $originalY = $this->sut->getY();
+
+        $this->sut->dropBallOneStep($containerTypeId);
+        $this->assertEquals($originalX, $this->sut->getX());
+        $this->assertEquals($originalY, $this->sut->getY());
+    }
 }
